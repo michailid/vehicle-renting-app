@@ -1,3 +1,5 @@
+This project is based on the tutorial _Build a Vehicle Rental Management App in Angular | Angular Project From Scratch_: https://www.youtube.com/watch?v=ME-oamfINHQ
+
 # VehicleRentingApp
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.8.
