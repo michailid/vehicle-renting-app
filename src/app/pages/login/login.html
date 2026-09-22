@@ -1,1 +1,72 @@
-<p>login works!</p>
+<div class="auth-page">
+  <div class="auth-panel">
+    <div class="brand">
+      <span class="brand-mark">V</span>
+      <div>
+        <h1>VehicleRenting</h1>
+        <p>Drive your next trip</p>
+      </div>
+    </div>
+
+    <div class="auth-card">
+      <section class="form-section">
+        <div class="section-header">
+          <h2>Login</h2>
+          <span>Welcome back</span>
+        </div>
+
+        <form class="auth-form">
+          <label>
+            <span>Email</span>
+            <input type="email" name="email" [(ngModel)]="email" placeholder="you@example.com" />
+          </label>
+
+          <label>
+            <span>Mobile Number</span>
+            <input type="tel" name="mobileNo" [(ngModel)]="mobileNo" placeholder="+1 234 567 890" />
+          </label>
+
+          <button type="button" class="primary-btn" (click)="onLogin()">Log In</button>
+
+          <div class="form-link">
+            <span>Forgot password?</span>
+            <a href="#">Reset here</a>
+          </div>
+        </form>
+      </section>
+
+      <div class="divider"><span>or</span></div>
+
+      <section class="form-section">
+        <div class="section-header">
+          <h2>Create Account</h2>
+          <span>Join today</span>
+        </div>
+
+        <form class="auth-form">
+          <label>
+            <span>Full Name</span>
+            <input type="text" name="CustomerName" placeholder="John Smith" />
+          </label>
+
+          <label>
+            <span>City</span>
+            <input type="text" name="CustomerCity" placeholder="New York" />
+          </label>
+
+          <label>
+            <span>Mobile Number</span>
+            <input type="tel" name="MobileNo" placeholder="1234567890" />
+          </label>
+
+          <label>
+            <span>Email</span>
+            <input type="email" name="Email" placeholder="john@example.com" />
+          </label>
+
+          <button type="submit" class="secondary-btn">Register</button>
+        </form>
+      </section>
+    </div>
+  </div>
+</div>
