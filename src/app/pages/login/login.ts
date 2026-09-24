@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LOGGED_USER_KEY } from '../../constants/constants';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   imports: [FormsModule],
@@ -27,6 +27,11 @@ export class Login {
 
   http = inject(HttpClient);
   router = inject(Router);
+  returnUrl: string = '/';
+
+  constructor(private route: ActivatedRoute) {
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+  }
 
   onLogin() {
     this.getAllCustomers();
@@ -37,9 +42,9 @@ export class Login {
     if (this.logggedInUser) {
       localStorage.setItem(LOGGED_USER_KEY, JSON.stringify(this.logggedInUser));
       console.log('Logged in successfully');
-      this.router.navigateByUrl('dashboard');
+      this.router.navigateByUrl(this.returnUrl);
     } else {
-      console.log('Wrong credentials');
+      alert('Wrong credentials');
     }
   }
 
@@ -48,7 +53,9 @@ export class Login {
       .post('https://freeapi.gerasim.in/api/CarRentalApp/CreateNewCustomer', this.registerObj)
       .subscribe({
         next: () => {},
-        error: () => {},
+        error: (error) => {
+          alert('Error: ' + error);
+        },
       });
   }
 
@@ -56,7 +63,6 @@ export class Login {
     this.http.get('https://freeapi.gerasim.in/api/CarRentalApp/GetCustomers').subscribe({
       next: (response: any) => {
         this.customersData = response.data;
-        console.log(response);
       },
       error: (error) => {
         alert('Error: ' + error);
