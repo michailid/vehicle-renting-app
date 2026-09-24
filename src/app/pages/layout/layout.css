@@ -129,6 +129,7 @@ button {
 }
 
 .primary-btn,
+.logout-btn,
 .secondary-btn,
 .ghost-btn {
   border: none;
@@ -142,6 +143,7 @@ button {
 }
 
 .primary-btn:hover,
+.logout-btn:hover,
 .secondary-btn:hover,
 .ghost-btn:hover {
   transform: translateY(-1px);
@@ -149,6 +151,11 @@ button {
 
 .primary-btn {
   background: linear-gradient(135deg, #14b8a6, #2dd4bf);
+  color: #062c2a;
+}
+
+.logout-btn {
+  background: linear-gradient(135deg, #eaeaea, #efefef);
   color: #062c2a;
 }
 
