@@ -11,10 +11,19 @@ import { Router } from '@angular/router';
   templateUrl: './login.html',
 })
 export class Login {
-  email: string = '';
-  mobileNo: string = '';
+  loginObj = {
+    email: '',
+    mobileNo: '',
+  };
   logggedInUser = {};
   customersData: any[] = [];
+  registerObj = {
+    CustomerId: 0,
+    CustomerName: '',
+    CustomerCity: '',
+    MobileNo: '',
+    Email: '',
+  };
 
   http = inject(HttpClient);
   router = inject(Router);
@@ -22,7 +31,7 @@ export class Login {
   onLogin() {
     this.getAllCustomers();
     this.logggedInUser = this.customersData.find(
-      (c) => c.email == this.email && c.mobileNo == this.mobileNo,
+      (c) => c.email == this.loginObj.email && c.mobileNo == this.loginObj.mobileNo,
     );
 
     if (this.logggedInUser) {
@@ -32,6 +41,15 @@ export class Login {
     } else {
       console.log('Wrong credentials');
     }
+  }
+
+  onRegister() {
+    this.http
+      .post('https://freeapi.gerasim.in/api/CarRentalApp/CreateNewCustomer', this.registerObj)
+      .subscribe({
+        next: () => {},
+        error: () => {},
+      });
   }
 
   getAllCustomers() {

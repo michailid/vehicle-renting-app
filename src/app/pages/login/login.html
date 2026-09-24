@@ -18,12 +18,22 @@
         <form class="auth-form">
           <label>
             <span>Email</span>
-            <input type="email" name="email" [(ngModel)]="email" placeholder="you@example.com" />
+            <input
+              type="email"
+              name="email"
+              [(ngModel)]="loginObj.email"
+              placeholder="you@example.com"
+            />
           </label>
 
           <label>
             <span>Mobile Number</span>
-            <input type="tel" name="mobileNo" [(ngModel)]="mobileNo" placeholder="+1 234 567 890" />
+            <input
+              type="tel"
+              name="mobileNo"
+              [(ngModel)]="loginObj.mobileNo"
+              placeholder="+1 234 567 890"
+            />
           </label>
 
           <button type="button" class="primary-btn" (click)="onLogin()">Log In</button>
@@ -46,25 +56,45 @@
         <form class="auth-form">
           <label>
             <span>Full Name</span>
-            <input type="text" name="CustomerName" placeholder="John Smith" />
+            <input
+              type="text"
+              name="CustomerName"
+              [(ngModel)]="registerObj.CustomerName"
+              placeholder="John Smith"
+            />
           </label>
 
           <label>
             <span>City</span>
-            <input type="text" name="CustomerCity" placeholder="New York" />
+            <input
+              type="text"
+              name="CustomerCity"
+              [(ngModel)]="registerObj.CustomerCity"
+              placeholder="New York"
+            />
           </label>
 
           <label>
             <span>Mobile Number</span>
-            <input type="tel" name="MobileNo" placeholder="1234567890" />
+            <input
+              type="tel"
+              name="MobileNo"
+              [(ngModel)]="registerObj.MobileNo"
+              placeholder="1234567890"
+            />
           </label>
 
           <label>
             <span>Email</span>
-            <input type="email" name="Email" placeholder="john@example.com" />
+            <input
+              type="email"
+              name="Email"
+              [(ngModel)]="registerObj.Email"
+              placeholder="john@example.com"
+            />
           </label>
 
-          <button type="submit" class="secondary-btn">Register</button>
+          <button type="submit" class="secondary-btn" (click)="onRegister()">Register</button>
         </form>
       </section>
     </div>
