@@ -1,9 +1,9 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet, RouterLink } from '@angular/router';
+import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { LOGGED_USER_KEY } from '../../constants/constants';
 
 @Component({
-  imports: [RouterOutlet, RouterLink],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive],
   selector: 'app-layout',
   styleUrl: './layout.css',
   templateUrl: './layout.html',

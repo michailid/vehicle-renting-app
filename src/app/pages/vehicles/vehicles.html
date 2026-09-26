@@ -1,1 +1,154 @@
-<p>vehicles works!</p>
+<div class="page-content vehicles-page">
+  <section class="page-top">
+    <div>
+      <h1>Vehicles</h1>
+    </div>
+
+    <a class="primary-btn" routerLink="add">+ Add New Car</a>
+  </section>
+
+  <section class="vehicles-grid" aria-label="Vehicle list">
+    @for (car of cars(); track $index) {
+      <article class="vehicle-card">
+        <div class="vehicle-image-wrap">
+          <img [src]="car.carImage" [alt]="car.brand" />
+          <span class="status-badge">Available</span>
+        </div>
+
+        <div class="vehicle-body">
+          <div class="vehicle-header">
+            <div>
+              <p class="meta-label">Brand</p>
+              <h3>{{ car.brand }}</h3>
+            </div>
+            <span class="price">₹{{ car.dailyRate }}/day</span>
+          </div>
+
+          <div class="vehicle-specs">
+            <div>
+              <span class="spec-label">Model</span>
+              <strong>{{ car.model }}</strong>
+            </div>
+            <div>
+              <span class="spec-label">Year</span>
+              <strong>{{ car.year }}</strong>
+            </div>
+            <div>
+              <span class="spec-label">Color</span>
+              <strong>{{ car.color }}</strong>
+            </div>
+          </div>
+
+          <div class="vehicle-footer">
+            <div>
+              <span class="spec-label">Registration</span>
+              <strong>{{ car.regNo }}</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="vehicle-actions">
+          <a class="secondary-btn" href="/vehicles/edit/2">Edit</a>
+          <a class="ghost-btn" href="/vehicles/delete/2">Delete</a>
+          <a class="primary-btn" href="/bookings/new/2">Book</a>
+        </div>
+      </article>
+    }
+
+    <article class="vehicle-card">
+      <div class="vehicle-image-wrap">
+        <img
+          src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=900&q=80"
+          alt="BMW car"
+        />
+        <span class="status-badge">Available</span>
+      </div>
+
+      <div class="vehicle-body">
+        <div class="vehicle-header">
+          <div>
+            <p class="meta-label">Brand</p>
+            <h3>BMW</h3>
+          </div>
+          <span class="price">₹4,800/day</span>
+        </div>
+
+        <div class="vehicle-specs">
+          <div>
+            <span class="spec-label">Model</span>
+            <strong>Series 3</strong>
+          </div>
+          <div>
+            <span class="spec-label">Year</span>
+            <strong>2024</strong>
+          </div>
+          <div>
+            <span class="spec-label">Color</span>
+            <strong>Black</strong>
+          </div>
+        </div>
+
+        <div class="vehicle-footer">
+          <div>
+            <span class="spec-label">Registration</span>
+            <strong>MH-09AB-7788</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="vehicle-actions">
+        <a class="secondary-btn" href="/vehicles/edit/3">Edit</a>
+        <a class="ghost-btn" href="/vehicles/delete/3">Delete</a>
+        <a class="primary-btn" href="/bookings/new/3">Book</a>
+      </div>
+    </article>
+
+    <article class="vehicle-card">
+      <div class="vehicle-image-wrap">
+        <img
+          src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=900&q=80"
+          alt="Mercedes car"
+        />
+        <span class="status-badge booked">Booked</span>
+      </div>
+
+      <div class="vehicle-body">
+        <div class="vehicle-header">
+          <div>
+            <p class="meta-label">Brand</p>
+            <h3>Mercedes</h3>
+          </div>
+          <span class="price">₹6,200/day</span>
+        </div>
+
+        <div class="vehicle-specs">
+          <div>
+            <span class="spec-label">Model</span>
+            <strong>C-Class</strong>
+          </div>
+          <div>
+            <span class="spec-label">Year</span>
+            <strong>2023</strong>
+          </div>
+          <div>
+            <span class="spec-label">Color</span>
+            <strong>Silver</strong>
+          </div>
+        </div>
+
+        <div class="vehicle-footer">
+          <div>
+            <span class="spec-label">Registration</span>
+            <strong>MH-18CZ-1120</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="vehicle-actions">
+        <a class="secondary-btn" href="/vehicles/edit/4">Edit</a>
+        <a class="ghost-btn" href="/vehicles/delete/4">Delete</a>
+        <a class="primary-btn" href="/bookings/new/4">Book</a>
+      </div>
+    </article>
+  </section>
+</div>

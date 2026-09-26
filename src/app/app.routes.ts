@@ -5,6 +5,7 @@ import { Vehicles } from './pages/vehicles/vehicles';
 import { Customers } from './pages/customers/customers';
 import { Bookings } from './pages/bookings/bookings';
 import { authGuard } from './guards/auth-guard';
+import { AddNewVehicle } from './pages/add-new-vehicle/add-new-vehicle';
 
 export const routes: Routes = [
   {
@@ -24,6 +25,11 @@ export const routes: Routes = [
   {
     path: 'vehicles',
     component: Vehicles,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'vehicles/add',
+    component: AddNewVehicle,
     canActivate: [authGuard],
   },
   {

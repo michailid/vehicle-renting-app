@@ -1,0 +1,134 @@
+<div class="page-shell">
+  <div class="container py-4 py-lg-5">
+    <div class="row justify-content-center">
+      <div class="col-12 col-xl-10">
+        <div class="add-car-card shadow-lg">
+          <div class="row g-0">
+            <div class="col-lg-4 left-panel">
+              <div class="brand-box">
+                <div class="brand-mark">
+                  <i class="fa-solid fa-car-side"></i>
+                </div>
+                <div>
+                  <p class="eyebrow">Fleet Management</p>
+                  <h1>VehicleRenting</h1>
+                </div>
+              </div>
+
+              <div class="info-box">
+                <h2>Add New Car</h2>
+                <p>
+                  Register a new vehicle to the fleet and make it available for booking instantly.
+                </p>
+
+                <ul class="feature-list">
+                  <li><i class="fa-solid fa-circle-check"></i> Manage inventory quickly</li>
+                  <li><i class="fa-solid fa-circle-check"></i> Set daily rental price</li>
+                  <li><i class="fa-solid fa-circle-check"></i> Publish vehicle details</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-lg-8 right-panel">
+              <div class="header-row">
+                <div>
+                  <p class="section-tag">Inventory</p>
+                  <h3>Vehicle Details</h3>
+                </div>
+                <span class="status-pill"><i class="fa-solid fa-circle"></i> Ready</span>
+              </div>
+
+              <form class="vehicle-form">
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label" for="brand">Brand</label>
+                    <input
+                      id="brand"
+                      class="form-control"
+                      type="text"
+                      placeholder="e.g. Tata Motors"
+                    />
+                  </div>
+
+                  <div class="col-md-6">
+                    <label class="form-label" for="model">Model</label>
+                    <input id="model" class="form-control" type="text" placeholder="e.g. Sumo" />
+                  </div>
+
+                  <div class="col-md-6">
+                    <label class="form-label" for="year">Year</label>
+                    <input
+                      id="year"
+                      class="form-control"
+                      type="number"
+                      min="2000"
+                      placeholder="2025"
+                    />
+                  </div>
+
+                  <div class="col-md-6">
+                    <label class="form-label" for="color">Color</label>
+                    <input id="color" class="form-control" type="text" placeholder="e.g. Red" />
+                  </div>
+
+                  <div class="col-md-6">
+                    <label class="form-label" for="dailyRate">Daily Rate</label>
+                    <div class="input-group">
+                      <span class="input-group-text">₹</span>
+                      <input
+                        id="dailyRate"
+                        class="form-control"
+                        type="number"
+                        min="0"
+                        placeholder="2000"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <label class="form-label" for="regNo">Registration Number</label>
+                    <input id="regNo" class="form-control" type="text" placeholder="MH-12QA-3412" />
+                  </div>
+
+                  <div class="col-12">
+                    <label class="form-label" for="carImage">Car Image URL</label>
+                    <input
+                      id="carImage"
+                      class="form-control"
+                      type="url"
+                      placeholder="https://example.com/car-image.jpg"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-preview mt-4">
+                  <div class="preview-header">
+                    <span><i class="fa-solid fa-image"></i> Preview</span>
+                  </div>
+                  <div class="preview-box">
+                    <div class="preview-icon">
+                      <i class="fa-solid fa-car-side"></i>
+                    </div>
+                    <div class="preview-text">
+                      <strong>Vehicle Preview</strong>
+                      <small
+                        >Image URL and vehicle information will appear here after submission.</small
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="action-row">
+                  <button type="button" class="btn btn-light btn-cancel">Cancel</button>
+                  <button type="submit" class="btn btn-primary btn-save">
+                    <i class="fa-solid fa-floppy-disk"></i> Save Car
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
