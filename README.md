@@ -1,4 +1,5 @@
-This project is based on the tutorial _Build a Vehicle Rental Management App in Angular | Angular Project From Scratch_: https://www.youtube.com/watch?v=ME-oamfINHQ
+This project is based on the tutorial _Build a Vehicle Rental Management App in Angular | Angular Project From Scratch_: https://www.youtube.com/watch?v=ME-oamfINHQ.
+The UI is built with the help of AI.
 
 # VehicleRentingApp
 
