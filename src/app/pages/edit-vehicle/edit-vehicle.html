@@ -1,0 +1,132 @@
+<main class="page-content edit-vehicle-page">
+  <section class="edit-card">
+    <aside class="edit-intro">
+      <div class="brand-mark" aria-hidden="true">
+        <i class="fa fa-car-side"></i>
+      </div>
+      <h1>Edit vehicle</h1>
+      <p class="intro-copy">
+        Update the vehicle details below to keep your fleet information accurate.
+      </p>
+    </aside>
+
+    <section class="edit-form-panel" aria-labelledby="vehicle-details-heading">
+      <header class="form-heading">
+        <div>
+          <h2 id="vehicle-details-heading">Vehicle details</h2>
+        </div>
+      </header>
+
+      <form class="vehicle-form">
+        <div class="row g-3">
+          <div class="col-12 col-md-6">
+            <label class="form-label" for="carId">Vehicle ID</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fa fa-hashtag" aria-hidden="true"></i></span>
+              <input
+                class="form-control"
+                id="carId"
+                [(ngModel)]="updateVehicleObj.carId"
+                name="carId"
+                type="number"
+                readonly
+              />
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label class="form-label" for="brand">Brand</label>
+            <input
+              class="form-control"
+              id="brand"
+              [(ngModel)]="updateVehicleObj.brand"
+              name="brand"
+              type="text"
+            />
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label class="form-label" for="model">Model</label>
+            <input
+              class="form-control"
+              id="model"
+              [(ngModel)]="updateVehicleObj.model"
+              name="model"
+              type="text"
+            />
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label class="form-label" for="year">Year</label>
+            <input
+              class="form-control"
+              id="year"
+              [(ngModel)]="updateVehicleObj.year"
+              name="year"
+              type="number"
+              min="1900"
+            />
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label class="form-label" for="color">Color</label>
+            <input
+              class="form-control"
+              id="color"
+              [(ngModel)]="updateVehicleObj.color"
+              name="color"
+              type="text"
+            />
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label class="form-label" for="dailyRate">Daily rate</label>
+            <div class="input-group">
+              <span class="input-group-text currency-symbol">₹</span>
+              <input
+                class="form-control"
+                id="dailyRate"
+                [(ngModel)]="updateVehicleObj.dailyRate"
+                name="dailyRate"
+                type="number"
+                min="0"
+              />
+            </div>
+          </div>
+
+          <div class="col-12">
+            <label class="form-label" for="regNo">Registration number</label>
+            <input
+              class="form-control"
+              id="regNo"
+              [(ngModel)]="updateVehicleObj.regNo"
+              name="regNo"
+              type="text"
+            />
+          </div>
+
+          <div class="col-12">
+            <label class="form-label" for="carImage">Car image URL</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fa fa-link" aria-hidden="true"></i></span>
+              <input
+                class="form-control"
+                id="carImage"
+                [(ngModel)]="updateVehicleObj.carImage"
+                name="carImage"
+                type="url"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="action-row">
+          <a class="btn btn-cancel" (click)="onCancel()">Cancel</a>
+          <button class="btn btn-save" type="button" (click)="onUpdateVehicle()">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i> Save changes
+          </button>
+        </div>
+      </form>
+    </section>
+  </section>
+</main>

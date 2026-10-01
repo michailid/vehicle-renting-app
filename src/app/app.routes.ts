@@ -6,6 +6,7 @@ import { Customers } from './pages/customers/customers';
 import { Bookings } from './pages/bookings/bookings';
 import { authGuard } from './guards/auth-guard';
 import { AddNewVehicle } from './pages/add-new-vehicle/add-new-vehicle';
+import { EditVehicle } from './pages/edit-vehicle/edit-vehicle';
 
 export const routes: Routes = [
   {
@@ -30,6 +31,11 @@ export const routes: Routes = [
   {
     path: 'vehicles/add',
     component: AddNewVehicle,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'vehicles/:id/edit',
+    component: EditVehicle,
     canActivate: [authGuard],
   },
   {
