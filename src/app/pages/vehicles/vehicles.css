@@ -19,7 +19,8 @@
 
 .primary-btn,
 .secondary-btn,
-.ghost-btn {
+.ghost-btn,
+.delete-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -37,7 +38,8 @@
 
 .primary-btn:hover,
 .secondary-btn:hover,
-.ghost-btn:hover {
+.ghost-btn:hover,
+.delete-btn:hover {
   transform: translateY(-1px);
 }
 
@@ -53,6 +55,12 @@
 
 .ghost-btn {
   background: rgba(148, 163, 184, 0.08);
+  color: #e2e8f0;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.delete-btn {
+  background: rgba(255, 0, 0, 0.513);
   color: #e2e8f0;
   border: 1px solid rgba(148, 163, 184, 0.18);
 }
@@ -182,7 +190,8 @@
 
 .vehicle-actions .primary-btn,
 .vehicle-actions .secondary-btn,
-.vehicle-actions .ghost-btn {
+.vehicle-actions .ghost-btn,
+.vehicle-actions .delete-btn {
   flex: 1 1 90px;
 }
 
@@ -202,7 +211,8 @@
 
   .vehicle-actions .primary-btn,
   .vehicle-actions .secondary-btn,
-  .vehicle-actions .ghost-btn {
+  .vehicle-actions .ghost-btn,
+  .vehicle-actions .delete-btn {
     width: 100%;
     flex: 1 1 auto;
   }

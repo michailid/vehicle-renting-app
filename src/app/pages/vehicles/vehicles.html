@@ -49,7 +49,7 @@
 
         <div class="vehicle-actions">
           <a class="secondary-btn" routerLink="{{ car.carId }}/edit">Edit</a>
-          <a class="ghost-btn" href="/vehicles/">Delete</a>
+          <a class="delete-btn" (click)="onDeleteVehicle(car.carId)">Delete</a>
           <a class="primary-btn" href="/bookings/new">Book</a>
         </div>
       </article>

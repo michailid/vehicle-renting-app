@@ -26,4 +26,20 @@ export class Vehicles implements OnInit {
       },
     });
   }
+
+  onDeleteVehicle(carId: number) {
+    const wantsToDelete = confirm('Are you sure you want to delete this vehicle?');
+    if (wantsToDelete) {
+      this.http
+        .delete(`https://freeapi.gerasim.in/api/CarRentalApp/DeleteCarbyCarId?carid=${carId}`)
+        .subscribe({
+          next: () => {
+            alert('Successfully deleted vehicle.');
+          },
+          error: (error) => {
+            alert('Error: ' + error);
+          },
+        });
+    }
+  }
 }

@@ -36,7 +36,7 @@ export class EditVehicle implements OnInit {
         const found = response.data.find((c: any) => c.carId === id);
         if (found) {
           this.updateVehicleObj = { ...found }; // copy for editing
-          this.cdr.markForCheck();
+          this.cdr.markForCheck(); // refresh the UI
         } else {
           this.router.navigate(['/vehicles']);
           alert('Vehicle not found.');
