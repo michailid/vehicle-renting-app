@@ -10,7 +10,7 @@
       <div class="card-header">
         <span class="label">Total Cars</span>
       </div>
-      <strong>25</strong>
+      <strong>{{ dashboardData().totalCars }}</strong>
       <p>Available vehicles in the system</p>
     </article>
 
@@ -18,7 +18,7 @@
       <div class="card-header">
         <span class="label">Total Customers</span>
       </div>
-      <strong>39</strong>
+      <strong>{{ dashboardData().totalCustomers }}</strong>
       <p>Registered customers this year</p>
     </article>
 
@@ -26,7 +26,7 @@
       <div class="card-header">
         <span class="label">Total Bookings</span>
       </div>
-      <strong>43</strong>
+      <strong>{{ dashboardData().totalBookings }}</strong>
       <p>Completed rental reservations</p>
     </article>
 
@@ -34,7 +34,7 @@
       <div class="card-header">
         <span class="label">Today's Booking</span>
       </div>
-      <strong>5</strong>
+      <strong>{{ dashboardData().todaysBooking }}</strong>
       <p>New bookings received today</p>
     </article>
 
@@ -42,7 +42,7 @@
       <div class="card-header">
         <span class="label">Today's Total Amount</span>
       </div>
-      <strong>22,955</strong>
+      <strong>{{ dashboardData().todayTotalAmount }}</strong>
       <p>Revenue generated today</p>
     </article>
 
@@ -50,7 +50,7 @@
       <div class="card-header">
         <span class="label">Total Amount</span>
       </div>
-      <strong>34,669,311</strong>
+      <strong>{{ dashboardData().totalAmount }}</strong>
       <p>Lifetime booking revenue</p>
     </article>
   </section>
