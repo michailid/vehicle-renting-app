@@ -50,7 +50,7 @@
         <div class="vehicle-actions">
           <a class="secondary-btn" routerLink="{{ car.carId }}/edit">Edit</a>
           <a class="delete-btn" (click)="onDeleteVehicle(car.carId)">Delete</a>
-          <a class="primary-btn" href="/bookings/new">Book</a>
+          <a class="primary-btn" (click)="onBook(car)">Book</a>
         </div>
       </article>
     }

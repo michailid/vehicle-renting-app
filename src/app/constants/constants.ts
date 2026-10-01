@@ -1,1 +1,1 @@
-export const LOGGED_USER_KEY = 'loggedInUser';
+export const LOGGED_USER_KEY = 'vehicleRentingAppUser';

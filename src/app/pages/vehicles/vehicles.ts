@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { LOGGED_USER_KEY } from '../../constants/constants';
 
 @Component({
   imports: [RouterLink],
@@ -11,6 +12,18 @@ import { RouterLink } from '@angular/router';
 export class Vehicles implements OnInit {
   cars: any = signal<[]>([]);
   http = inject(HttpClient);
+
+  newBookingObj = {
+    CustomerName: '',
+    CustomerCity: '',
+    MobileNo: '',
+    Email: '',
+    BookingId: 0,
+    CarId: 0,
+    BookingDate: '',
+    Discount: 0,
+    TotalBillAmount: 0,
+  };
 
   ngOnInit() {
     this.getAllCars();
@@ -41,5 +54,33 @@ export class Vehicles implements OnInit {
           },
         });
     }
+  }
+
+  onBook(car: any) {
+    if (localStorage.getItem(LOGGED_USER_KEY)) {
+      const userData = JSON.parse(localStorage.getItem(LOGGED_USER_KEY)!);
+      this.newBookingObj = {
+        CustomerName: userData.customerName,
+        CustomerCity: userData.customerCity,
+        MobileNo: userData.mobileNo,
+        Email: userData.email,
+        BookingId: 0,
+        CarId: car.carId,
+        BookingDate: new Date().toDateString(),
+        Discount: 0,
+        TotalBillAmount: car.dailyRate,
+      };
+    }
+
+    this.http
+      .post('https://freeapi.gerasim.in/api/CarRentalApp/CreateNewBooking', this.newBookingObj)
+      .subscribe({
+        next: () => {
+          alert('Vehicle booked successfully.');
+        },
+        error: (error) => {
+          alert('Error: ' + error);
+        },
+      });
   }
 }
