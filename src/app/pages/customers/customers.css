@@ -134,6 +134,20 @@
     border-color 0.15s ease;
 }
 
+.action {
+  display: grid;
+  width: 80px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 8px;
+  background: rgba(148, 163, 184, 0.07);
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+}
+
 .edit-action {
   color: #5eead4;
 }
@@ -153,6 +167,11 @@
 }
 
 .icon-action:focus-visible {
+  outline: 2px solid #5eead4;
+  outline-offset: 2px;
+}
+
+.action:focus-visible {
   outline: 2px solid #5eead4;
   outline-offset: 2px;
 }

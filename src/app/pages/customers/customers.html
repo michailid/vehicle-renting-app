@@ -28,33 +28,73 @@
         <tbody>
           @for (customer of customers(); track customer) {
             <tr>
-              <td class="customer-id">#{{ customer.customerId }}</td>
-              <td>
-                <span class="customer-name">{{ customer.customerName }}</span>
-              </td>
-              <td>{{ customer.customerCity }}</td>
-              <td>{{ customer.mobileNo }}</td>
-              <td>{{ customer.email }}</td>
-              <td>
-                <div class="row-actions">
-                  <button
-                    type="button"
-                    class="icon-action edit-action"
-                    aria-label="Edit {{ customer.customerName }}"
-                    title="Edit customer"
-                  >
-                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                  </button>
-                  <button
-                    type="button"
-                    class="icon-action delete-action"
-                    aria-label="Delete {{ customer.customerName }}"
-                    title="Delete customer"
-                  >
-                    <i class="fa fa-trash-o" aria-hidden="true"></i>
-                  </button>
-                </div>
-              </td>
+              @if (editingId === customer.customerId) {
+                <td class="customer-id">#{{ customer.customerId }}</td>
+                <td>
+                  <input [(ngModel)]="draft.customerName" />
+                </td>
+                <td>
+                  <input type="text" [(ngModel)]="draft.customerCity" />
+                </td>
+                <td>
+                  <input type="text" [(ngModel)]="draft.mobileNo" />
+                </td>
+                <td>
+                  <input type="text" [(ngModel)]="draft.email" />
+                </td>
+                <td>
+                  <div class="row-actions">
+                    <button
+                      type="button"
+                      class="action edit-action"
+                      aria-label="Edit {{ customer.customerName }}"
+                      title="Edit customer"
+                      (click)="onSave()"
+                    >
+                      Save
+                    </button>
+                    <button
+                      type="button"
+                      class="action delete-action"
+                      aria-label="Cancel editing {{ customer.customerName }}"
+                      title="Cancel editing customer"
+                      (click)="onCancel()"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </td>
+              } @else {
+                <td class="customer-id">#{{ customer.customerId }}</td>
+                <td>
+                  <span class="customer-name">{{ customer.customerName }}</span>
+                </td>
+                <td>{{ customer.customerCity }}</td>
+                <td>{{ customer.mobileNo }}</td>
+                <td>{{ customer.email }}</td>
+                <td>
+                  <div class="row-actions">
+                    <button
+                      type="button"
+                      class="icon-action edit-action"
+                      aria-label="Edit {{ customer.customerName }}"
+                      title="Edit customer"
+                      (click)="onEdit(customer)"
+                    >
+                      <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </button>
+                    <button
+                      type="button"
+                      class="icon-action delete-action"
+                      aria-label="Delete {{ customer.customerName }}"
+                      title="Delete customer"
+                      (click)="onDelete(customer)"
+                    >
+                      <i class="fa fa-trash-o" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                </td>
+              }
             </tr>
           }
         </tbody>
