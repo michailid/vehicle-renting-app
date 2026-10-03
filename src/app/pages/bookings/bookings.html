@@ -1,1 +1,85 @@
-<p>bookings works!</p>
+<main class="page-content bookings-page">
+  <section class="bookings-heading" aria-labelledby="bookings-title">
+    <div>
+      <h1 id="bookings-title">Bookings</h1>
+      <p class="heading-description">Manage customer reservations and booking details.</p>
+    </div>
+  </section>
+
+  <section class="booking-list" aria-label="Booking list">
+    <div class="list-heading">
+      <div>
+        <h2>All bookings</h2>
+        <p>Filter reservations by their booking date.</p>
+      </div>
+      <span class="booking-count">
+        <strong>5</strong>
+        bookings
+      </span>
+    </div>
+
+    <div class="date-filter" aria-label="Filter bookings by date interval">
+      <div class="filter-label">
+        <i class="fa fa-calendar" aria-hidden="true"></i>
+        <span>Booking date</span>
+      </div>
+      <div class="date-inputs">
+        <label>
+          <span>From</span>
+          <input type="date" class="form-control" />
+        </label>
+        <span class="date-separator" aria-hidden="true">to</span>
+        <label>
+          <span>To</span>
+          <input type="date" class="form-control" />
+        </label>
+        <button type="button" class="clear-filter">Clear dates</button>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table booking-table align-middle mb-0">
+        <thead>
+          <tr>
+            <th scope="col">Booking</th>
+            <th scope="col">Date</th>
+            <th scope="col">Customer</th>
+            <th scope="col">Mobile</th>
+            <th scope="col">Vehicle</th>
+            <th scope="col">Discount</th>
+            <th scope="col">Total amount</th>
+            <th scope="col" class="actions-heading">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="booking-uid"></span>
+              <span class="booking-id">#</span>
+            </td>
+            <td></td>
+            <td class="customer-name"></td>
+            <td></td>
+            <td>
+              <span class="vehicle-name"></span>
+            </td>
+            <td></td>
+            <td class="amount"></td>
+            <td>
+              <div class="row-actions">
+                <button
+                  type="button"
+                  class="icon-action delete-action"
+                  aria-label="Delete booking "
+                  title="Delete booking"
+                >
+                  <i class="fa fa-trash-o" aria-hidden="true"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
