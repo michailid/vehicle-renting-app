@@ -13,7 +13,7 @@
         <p>Filter reservations by their booking date.</p>
       </div>
       <span class="booking-count">
-        <strong>5</strong>
+        <strong>{{ filteredBookings().length }}</strong>
         bookings
       </span>
     </div>
@@ -26,14 +26,23 @@
       <div class="date-inputs">
         <label>
           <span>From</span>
-          <input type="date" class="form-control" />
+          <input type="date" class="form-control" #fromDate />
         </label>
         <span class="date-separator" aria-hidden="true">to</span>
         <label>
           <span>To</span>
-          <input type="date" class="form-control" />
+          <input type="date" class="form-control" #toDate />
         </label>
-        <button type="button" class="clear-filter">Clear dates</button>
+        <button type="button" class="search" (click)="onSearch(fromDate.value, toDate.value)">
+          Search
+        </button>
+        <button
+          type="button"
+          class="clear-filter"
+          (click)="fromDate.value = ''; toDate.value = ''; onClear()"
+        >
+          Clear dates
+        </button>
       </div>
     </div>
 
@@ -52,32 +61,34 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <span class="booking-uid"></span>
-              <span class="booking-id">#</span>
-            </td>
-            <td></td>
-            <td class="customer-name"></td>
-            <td></td>
-            <td>
-              <span class="vehicle-name"></span>
-            </td>
-            <td></td>
-            <td class="amount"></td>
-            <td>
-              <div class="row-actions">
-                <button
-                  type="button"
-                  class="icon-action delete-action"
-                  aria-label="Delete booking "
-                  title="Delete booking"
-                >
-                  <i class="fa fa-trash-o" aria-hidden="true"></i>
-                </button>
-              </div>
-            </td>
-          </tr>
+          @for (booking of filteredBookings(); track booking) {
+            <tr>
+              <td>
+                <span class="booking-uid">{{ booking.bookingUid }}</span>
+                <span class="booking-id">#{{ booking.bookingId }}</span>
+              </td>
+              <td>{{ booking.bookingDate | date: 'mediumDate' }}</td>
+              <td class="customer-name">{{ booking.customerName }}</td>
+              <td>{{ booking.mobileNo }}</td>
+              <td>
+                <span class="vehicle-name">{{ booking.brand }} {{ booking.model }}</span>
+              </td>
+              <td>{{ booking.discount }}</td>
+              <td class="amount">{{ booking.totalBillAmount }}</td>
+              <td>
+                <div class="row-actions">
+                  <button
+                    type="button"
+                    class="icon-action delete-action"
+                    aria-label="Delete booking "
+                    title="Delete booking"
+                  >
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
         </tbody>
       </table>
     </div>

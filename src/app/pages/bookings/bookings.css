@@ -130,12 +130,29 @@
   cursor: pointer;
 }
 
+.search {
+  min-height: 38px;
+  padding: 0 12px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 8px;
+  background: linear-gradient(135deg, #14b8a6, #2dd4bf);
+  color: #062c2a;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
 .clear-filter:not(:disabled):hover {
-  border-color: rgba(45, 212, 191, 0.4);
+  border-color: rgba(45, 212, 190, 0.585);
   color: #5eead4;
 }
 
-.clear-filter:disabled {
+.search:hover {
+  background: linear-gradient(135deg, #1bf7dd, #22f8db);
+  color: #062c2a;
+}
+
+.clear-filter:disabled,
+.search:disabled {
   opacity: 0.45;
   cursor: default;
 }
