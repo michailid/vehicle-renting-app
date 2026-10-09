@@ -42,4 +42,17 @@ export class Bookings implements OnInit {
   onClear() {
     this.filteredBookings.set(this.bookings());
   }
+
+  onDelete(bookingId: number) {
+    this.http
+      .delete(`https://freeapi.gerasim.in/api/CarRentalApp/DeletBookingById?id=${bookingId}`)
+      .subscribe({
+        next: () => {
+          alert('Successfully deleted booking.');
+        },
+        error: (error) => {
+          alert('Error: ' + error);
+        },
+      });
+  }
 }
