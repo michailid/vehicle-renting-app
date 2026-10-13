@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { APIResponse } from '../../model/model';
 
 @Component({
   imports: [FormsModule],
@@ -19,14 +20,16 @@ export class Customers implements OnInit {
   }
 
   getAllCustomers() {
-    this.http.get('https://freeapi.gerasim.in/api/CarRentalApp/GetCustomers').subscribe({
-      next: (response: any) => {
-        this.customers.set(response.data);
-      },
-      error: (error) => {
-        alert('Error loading customers: ' + error);
-      },
-    });
+    this.http
+      .get<APIResponse>('https://freeapi.gerasim.in/api/CarRentalApp/GetCustomers')
+      .subscribe({
+        next: (response: APIResponse) => {
+          this.customers.set(response.data);
+        },
+        error: (error: any) => {
+          alert('Error loading customers: ' + error);
+        },
+      });
   }
 
   onEdit(customer: any) {

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LOGGED_USER_KEY } from '../../constants/constants';
+import { APIResponse } from '../../model/model';
 
 @Component({
   imports: [RouterLink],
@@ -30,11 +31,11 @@ export class Vehicles implements OnInit {
   }
 
   getAllCars() {
-    this.http.get('https://freeapi.gerasim.in/api/CarRentalApp/GetCars').subscribe({
-      next: (response: any) => {
+    this.http.get<APIResponse>('https://freeapi.gerasim.in/api/CarRentalApp/GetCars').subscribe({
+      next: (response: APIResponse) => {
         this.cars.set(response.data);
       },
-      error: (error) => {
+      error: (error: any) => {
         alert('Error: ' + error);
       },
     });

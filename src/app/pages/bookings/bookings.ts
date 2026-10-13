@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit, signal } from '@angular/core';
+import { APIResponse } from '../../model/model';
 @Component({
   imports: [DatePipe],
   selector: 'app-bookings',
@@ -17,15 +18,17 @@ export class Bookings implements OnInit {
   }
 
   getAllBookings() {
-    this.http.get('https://freeapi.gerasim.in/api/CarRentalApp/geAllBookings').subscribe({
-      next: (response: any) => {
-        this.bookings.set(response.data);
-        this.filteredBookings.set(this.bookings());
-      },
-      error: (error) => {
-        alert('Error: ' + error);
-      },
-    });
+    this.http
+      .get<APIResponse>('https://freeapi.gerasim.in/api/CarRentalApp/geAllBookings')
+      .subscribe({
+        next: (response: APIResponse) => {
+          this.bookings.set(response.data);
+          this.filteredBookings.set(this.bookings());
+        },
+        error: (error: any) => {
+          alert('Error: ' + error);
+        },
+      });
   }
 
   onSearch(from: string, to: string) {

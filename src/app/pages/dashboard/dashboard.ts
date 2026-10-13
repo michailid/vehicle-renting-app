@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit, signal } from '@angular/core';
+import { APIResponse } from '../../model/model';
 
 @Component({
   imports: [],
@@ -12,13 +13,15 @@ export class Dashboard implements OnInit {
   dashboardData = signal<any>({});
 
   ngOnInit(): void {
-    this.http.get('https://freeapi.gerasim.in/api/CarRentalApp/GetDashboardData').subscribe({
-      next: (response: any) => {
-        this.dashboardData.set(response.data[0]);
-      },
-      error: (error) => {
-        alert('Error: ' + error);
-      },
-    });
+    this.http
+      .get<APIResponse>('https://freeapi.gerasim.in/api/CarRentalApp/GetDashboardData')
+      .subscribe({
+        next: (response: APIResponse) => {
+          this.dashboardData.set(response.data[0]);
+        },
+        error: (error: any) => {
+          alert('Error: ' + error);
+        },
+      });
   }
 }

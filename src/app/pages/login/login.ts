@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LOGGED_USER_KEY } from '../../constants/constants';
 import { ActivatedRoute, Router } from '@angular/router';
+import { APIResponse } from '../../model/model';
 
 @Component({
   imports: [FormsModule],
@@ -35,17 +36,6 @@ export class Login {
 
   onLogin() {
     this.getAllCustomers();
-    this.logggedInUser = this.customersData.find(
-      (c) => c.email == this.loginObj.email && c.mobileNo == this.loginObj.mobileNo,
-    );
-
-    if (this.logggedInUser) {
-      localStorage.setItem(LOGGED_USER_KEY, JSON.stringify(this.logggedInUser));
-      console.log('Logged in successfully');
-      this.router.navigateByUrl(this.returnUrl);
-    } else {
-      alert('Wrong credentials');
-    }
   }
 
   onRegister() {
@@ -60,13 +50,27 @@ export class Login {
   }
 
   getAllCustomers() {
-    this.http.get('https://freeapi.gerasim.in/api/CarRentalApp/GetCustomers').subscribe({
-      next: (response: any) => {
-        this.customersData = response.data;
-      },
-      error: (error) => {
-        alert('Error: ' + error);
-      },
-    });
+    this.http
+      .get<APIResponse>('https://freeapi.gerasim.in/api/CarRentalApp/GetCustomers')
+      .subscribe({
+        next: (response: APIResponse) => {
+          this.logggedInUser = response.data.find(
+            (c) => c.email == this.loginObj.email && c.mobileNo == this.loginObj.mobileNo,
+          );
+
+          if (this.logggedInUser) {
+            localStorage.setItem(LOGGED_USER_KEY, JSON.stringify(this.logggedInUser));
+            console.log('Logged in successfully');
+            this.router.navigateByUrl(this.returnUrl);
+          } else {
+            alert('Wrong credentials');
+          }
+
+          this.customersData = response.data;
+        },
+        error: (error: any) => {
+          alert('Error: ' + error);
+        },
+      });
   }
 }
