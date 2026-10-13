@@ -36,7 +36,7 @@
                     <input
                       id="brand"
                       class="form-control"
-                      [(ngModel)]="newVehicleObj.Brand"
+                      [(ngModel)]="newVehicleObj.brand"
                       name="brand"
                       type="text"
                       placeholder="e.g. Tata Motors"
@@ -48,7 +48,7 @@
                     <input
                       id="model"
                       class="form-control"
-                      [(ngModel)]="newVehicleObj.Model"
+                      [(ngModel)]="newVehicleObj.model"
                       name="model"
                       type="text"
                       placeholder="e.g. Sumo"
@@ -60,7 +60,7 @@
                     <input
                       id="year"
                       class="form-control"
-                      [(ngModel)]="newVehicleObj.Year"
+                      [(ngModel)]="newVehicleObj.year"
                       name="year"
                       type="number"
                       min="2000"
@@ -73,7 +73,7 @@
                     <input
                       id="color"
                       class="form-control"
-                      [(ngModel)]="newVehicleObj.Color"
+                      [(ngModel)]="newVehicleObj.color"
                       name="color"
                       type="text"
                       placeholder="e.g. Red"
@@ -87,7 +87,7 @@
                       <input
                         id="dailyRate"
                         class="form-control"
-                        [(ngModel)]="newVehicleObj.DailyRate"
+                        [(ngModel)]="newVehicleObj.dailyRate"
                         name="dailyRate"
                         type="number"
                         min="0"
@@ -101,7 +101,7 @@
                     <input
                       id="regNo"
                       class="form-control"
-                      [(ngModel)]="newVehicleObj.RegNo"
+                      [(ngModel)]="newVehicleObj.regNo"
                       name="regNo"
                       type="text"
                       placeholder="MH-12QA-3412"
@@ -113,7 +113,7 @@
                     <input
                       id="carImage"
                       class="form-control"
-                      [(ngModel)]="newVehicleObj.CarImage"
+                      [(ngModel)]="newVehicleObj.carImage"
                       name="carImage"
                       type="url"
                       placeholder="https://example.com/car-image.jpg"
@@ -122,7 +122,9 @@
                 </div>
 
                 <div class="action-row">
-                  <button type="button" class="btn btn-light btn-cancel" (click)="onCancel()">Cancel</button>
+                  <button type="button" class="btn btn-light btn-cancel" (click)="onCancel()">
+                    Cancel
+                  </button>
                   <button type="button" class="btn btn-primary btn-save" (click)="onSaveVehicle()">
                     <i class="fa fa-floppy-disk"></i> Save Car
                   </button>

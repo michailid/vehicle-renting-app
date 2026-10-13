@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { APIResponse } from '../../model/model';
+import { APIResponse } from '../../model/api-response.model';
+import { DashboardData } from '../../model/dashboard-data.model';
 
 @Component({
   imports: [],
@@ -10,7 +11,7 @@ import { APIResponse } from '../../model/model';
 })
 export class Dashboard implements OnInit {
   http = inject(HttpClient);
-  dashboardData = signal<any>({});
+  dashboardData = signal<DashboardData>(new DashboardData());
 
   ngOnInit(): void {
     this.http

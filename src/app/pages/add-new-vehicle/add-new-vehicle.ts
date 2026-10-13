@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Vehicle } from '../../model/vehicle.model';
 
 @Component({
   imports: [FormsModule],
@@ -10,16 +11,7 @@ import { Router } from '@angular/router';
   templateUrl: './add-new-vehicle.html',
 })
 export class AddNewVehicle {
-  newVehicleObj = {
-    CarId: 0,
-    Brand: '',
-    Model: '',
-    Year: '',
-    Color: '',
-    DailyRate: '',
-    CarImage: '',
-    RegNo: '',
-  };
+  newVehicleObj = new Vehicle();
   http = inject(HttpClient);
   router = inject(Router);
 
@@ -38,16 +30,7 @@ export class AddNewVehicle {
   }
 
   onCancel() {
-    this.newVehicleObj = {
-      CarId: 0,
-      Brand: '',
-      Model: '',
-      Year: '',
-      Color: '',
-      DailyRate: '',
-      CarImage: '',
-      RegNo: '',
-    };
+    this.newVehicleObj = new Vehicle();
     this.router.navigateByUrl('vehicles');
   }
 }

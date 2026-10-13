@@ -31,16 +31,16 @@
               @if (editingId === customer.customerId) {
                 <td class="customer-id">#{{ customer.customerId }}</td>
                 <td>
-                  <input [(ngModel)]="draft.customerName" />
+                  <input [(ngModel)]="draft!.customerName" />
                 </td>
                 <td>
-                  <input type="text" [(ngModel)]="draft.customerCity" />
+                  <input type="text" [(ngModel)]="draft!.customerCity" />
                 </td>
                 <td>
-                  <input type="text" [(ngModel)]="draft.mobileNo" />
+                  <input type="text" [(ngModel)]="draft!.mobileNo" />
                 </td>
                 <td>
-                  <input type="text" [(ngModel)]="draft.email" />
+                  <input type="text" [(ngModel)]="draft!.email" />
                 </td>
                 <td>
                   <div class="row-actions">

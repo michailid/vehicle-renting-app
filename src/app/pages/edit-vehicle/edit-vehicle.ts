@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Vehicle } from '../../model/vehicle.model';
 
 @Component({
   imports: [FormsModule],
@@ -10,16 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './edit-vehicle.html',
 })
 export class EditVehicle implements OnInit {
-  updateVehicleObj = {
-    carId: 0,
-    brand: 'asdf',
-    model: '',
-    year: 0,
-    color: '',
-    dailyRate: 0,
-    carImage: '',
-    regNo: '',
-  };
+  updateVehicleObj = new Vehicle();
   router = inject(Router);
   http = inject(HttpClient);
   cdr = inject(ChangeDetectorRef);
@@ -33,7 +25,7 @@ export class EditVehicle implements OnInit {
     this.http
       .get('https://freeapi.gerasim.in/api/CarRentalApp/GetCars')
       .subscribe((response: any) => {
-        const found = response.data.find((c: any) => c.carId === id);
+        const found = response.data.find((c: Vehicle) => c.carId === id);
         if (found) {
           this.updateVehicleObj = { ...found }; // copy for editing
           this.cdr.markForCheck(); // refresh the UI
@@ -59,17 +51,7 @@ export class EditVehicle implements OnInit {
   }
 
   onCancel() {
-    this.updateVehicleObj = {
-      carId: 0,
-      brand: 'asdf',
-      model: '',
-      year: 0,
-      color: '',
-      dailyRate: 0,
-      carImage: '',
-      regNo: '',
-    };
-
+    this.updateVehicleObj = new Vehicle();
     this.router.navigateByUrl('vehicles');
   }
 }

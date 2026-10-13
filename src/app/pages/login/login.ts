@@ -3,7 +3,8 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LOGGED_USER_KEY } from '../../constants/constants';
 import { ActivatedRoute, Router } from '@angular/router';
-import { APIResponse } from '../../model/model';
+import { APIResponse } from '../../model/api-response.model';
+import { Customer } from '../../model/customer.model';
 
 @Component({
   imports: [FormsModule],
@@ -17,14 +18,8 @@ export class Login {
     mobileNo: '',
   };
   logggedInUser = {};
-  customersData: any[] = [];
-  registerObj = {
-    CustomerId: 0,
-    CustomerName: '',
-    CustomerCity: '',
-    MobileNo: '',
-    Email: '',
-  };
+  customersData: Customer[] = [];
+  registerObj = new Customer();
 
   http = inject(HttpClient);
   router = inject(Router);
@@ -55,7 +50,7 @@ export class Login {
       .subscribe({
         next: (response: APIResponse) => {
           this.logggedInUser = response.data.find(
-            (c) => c.email == this.loginObj.email && c.mobileNo == this.loginObj.mobileNo,
+            (c: Customer) => c.email == this.loginObj.email && c.mobileNo == this.loginObj.mobileNo,
           );
 
           if (this.logggedInUser) {

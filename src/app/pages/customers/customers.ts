@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { APIResponse } from '../../model/model';
+import { APIResponse } from '../../model/api-response.model';
+import { Customer } from '../../model/customer.model';
 
 @Component({
   imports: [FormsModule],
@@ -11,9 +12,9 @@ import { APIResponse } from '../../model/model';
 })
 export class Customers implements OnInit {
   http = inject(HttpClient);
-  customers = signal<any>([]);
+  customers = signal<Customer[]>([]);
   editingId: number | null = null;
-  draft: any = null;
+  draft: Customer | null = null;
 
   ngOnInit(): void {
     this.getAllCustomers();
@@ -32,12 +33,12 @@ export class Customers implements OnInit {
       });
   }
 
-  onEdit(customer: any) {
+  onEdit(customer: Customer) {
     this.editingId = customer.customerId;
     this.draft = structuredClone(customer);
   }
 
-  onDelete(customer: any) {
+  onDelete(customer: Customer) {
     const wantsToDelete = confirm('Are you sure you want to delete this customer?');
     if (wantsToDelete) {
       this.http

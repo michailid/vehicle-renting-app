@@ -2,7 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LOGGED_USER_KEY } from '../../constants/constants';
-import { APIResponse } from '../../model/model';
+import { APIResponse } from '../../model/api-response.model';
+import { Vehicle } from '../../model/vehicle.model';
+import { Booking } from '../../model/booking.model';
 
 @Component({
   imports: [RouterLink],
@@ -11,20 +13,10 @@ import { APIResponse } from '../../model/model';
   templateUrl: './vehicles.html',
 })
 export class Vehicles implements OnInit {
-  cars: any = signal<[]>([]);
+  cars = signal<Vehicle[]>([]);
   http = inject(HttpClient);
 
-  newBookingObj = {
-    CustomerName: '',
-    CustomerCity: '',
-    MobileNo: '',
-    Email: '',
-    BookingId: 0,
-    CarId: 0,
-    BookingDate: '',
-    Discount: 0,
-    TotalBillAmount: 0,
-  };
+  newBookingObj = new Booking();
 
   ngOnInit() {
     this.getAllCars();
@@ -57,19 +49,19 @@ export class Vehicles implements OnInit {
     }
   }
 
-  onBook(car: any) {
+  onBook(car: Vehicle) {
     if (localStorage.getItem(LOGGED_USER_KEY)) {
       const userData = JSON.parse(localStorage.getItem(LOGGED_USER_KEY)!);
       this.newBookingObj = {
-        CustomerName: userData.customerName,
-        CustomerCity: userData.customerCity,
-        MobileNo: userData.mobileNo,
-        Email: userData.email,
-        BookingId: 0,
-        CarId: car.carId,
-        BookingDate: new Date().toDateString(),
-        Discount: 0,
-        TotalBillAmount: car.dailyRate,
+        customerName: userData.customerName,
+        customerCity: userData.customerCity,
+        mobileNo: userData.mobileNo,
+        email: userData.email,
+        bookingId: 0,
+        carId: car.carId,
+        bookingDate: new Date().toDateString(),
+        discount: 0,
+        totalBillAmount: car.dailyRate,
       };
     }
 
