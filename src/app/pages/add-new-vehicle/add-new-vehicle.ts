@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Vehicle } from '../../model/vehicle.model';
+import { APIResponse } from '../../model/api-response.model';
+import { Master } from '../../services/master';
 
 @Component({
   imports: [FormsModule],
@@ -12,16 +13,18 @@ import { Vehicle } from '../../model/vehicle.model';
 })
 export class AddNewVehicle {
   newVehicleObj = new Vehicle();
-  http = inject(HttpClient);
+  masterService = inject(Master);
   router = inject(Router);
 
   onSaveVehicle() {
-    this.http
-      .post('https://freeapi.gerasim.in/api/CarRentalApp/CreateNewCar', this.newVehicleObj)
-      .subscribe({
-        next: (res) => {
-          alert('Vehicle added successfully.');
-          this.router.navigateByUrl('vehicles');
+    this.masterService.createNewVehicle(this.newVehicleObj).subscribe({
+        next: (res: APIResponse) => {
+          if (res.result) {
+            alert('Vehicle added successfully.');
+            this.router.navigateByUrl('vehicles');
+          } else {
+            alert(res.message);
+          }
         },
         error: (error) => {
           alert('Error: ' + error);

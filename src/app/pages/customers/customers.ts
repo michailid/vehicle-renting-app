@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { APIResponse } from '../../model/api-response.model';
 import { Customer } from '../../model/customer.model';
+import { Master } from '../../services/master';
 
 @Component({
   imports: [FormsModule],
@@ -11,7 +11,7 @@ import { Customer } from '../../model/customer.model';
   templateUrl: './customers.html',
 })
 export class Customers implements OnInit {
-  http = inject(HttpClient);
+  masterService = inject(Master);
   customers = signal<Customer[]>([]);
   editingId: number | null = null;
   draft: Customer | null = null;
@@ -21,11 +21,13 @@ export class Customers implements OnInit {
   }
 
   getAllCustomers() {
-    this.http
-      .get<APIResponse>('https://freeapi.gerasim.in/api/CarRentalApp/GetCustomers')
-      .subscribe({
+    this.masterService.getAllCustomers().subscribe({
         next: (response: APIResponse) => {
-          this.customers.set(response.data);
+          if (response.result) {
+            this.customers.set(response.data);
+          } else {
+            alert(response.message);
+          }
         },
         error: (error: any) => {
           alert('Error loading customers: ' + error);
@@ -41,12 +43,12 @@ export class Customers implements OnInit {
   onDelete(customer: Customer) {
     const wantsToDelete = confirm('Are you sure you want to delete this customer?');
     if (wantsToDelete) {
-      this.http
-        .delete(
-          `https://freeapi.gerasim.in/api/CarRentalApp/DeletCustomerById?id=${customer.customerId}`,
-        )
-        .subscribe({
-          next: () => {},
+      this.masterService.deleteCustomer(customer.customerId).subscribe({
+          next: (response: APIResponse) => {
+            if (!response.result) {
+              alert(response.message);
+            }
+          },
           error: (error) => {
             alert('Error: ' + error);
           },
@@ -55,10 +57,12 @@ export class Customers implements OnInit {
   }
 
   onSave() {
-    this.http
-      .put('https://freeapi.gerasim.in/api/CarRentalApp/UpdateCustomer', this.draft)
-      .subscribe({
-        next: () => {},
+    this.masterService.updateCustomer(this.draft).subscribe({
+        next: (response: APIResponse) => {
+          if (!response.result) {
+            alert(response.message);
+          }
+        },
         error: (error) => {
           alert('Error: ' + error);
         },

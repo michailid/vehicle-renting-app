@@ -8,6 +8,9 @@ export class Booking {
   bookingDate: string;
   discount: number;
   totalBillAmount: number;
+  bookingUid: string;
+  brand: string;
+  model: string;
 
   constructor() {
     this.customerName = '';
@@ -19,5 +22,8 @@ export class Booking {
     this.bookingDate = '';
     this.discount = 0;
     this.totalBillAmount = 0;
+    this.bookingUid = '';
+    this.brand = '';
+    this.model = '';
   }
 }

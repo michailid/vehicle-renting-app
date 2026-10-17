@@ -1,10 +1,10 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LOGGED_USER_KEY } from '../../constants/constants';
 import { APIResponse } from '../../model/api-response.model';
 import { Vehicle } from '../../model/vehicle.model';
 import { Booking } from '../../model/booking.model';
+import { Master } from '../../services/master';
 
 @Component({
   imports: [RouterLink],
@@ -14,7 +14,7 @@ import { Booking } from '../../model/booking.model';
 })
 export class Vehicles implements OnInit {
   cars = signal<Vehicle[]>([]);
-  http = inject(HttpClient);
+  masterService = inject(Master);
 
   newBookingObj = new Booking();
 
@@ -23,9 +23,13 @@ export class Vehicles implements OnInit {
   }
 
   getAllCars() {
-    this.http.get<APIResponse>('https://freeapi.gerasim.in/api/CarRentalApp/GetCars').subscribe({
+    this.masterService.getAllVehicles().subscribe({
       next: (response: APIResponse) => {
-        this.cars.set(response.data);
+        if (response.result) {
+          this.cars.set(response.data);
+        } else {
+          alert(response.message);
+        }
       },
       error: (error: any) => {
         alert('Error: ' + error);
@@ -36,16 +40,18 @@ export class Vehicles implements OnInit {
   onDeleteVehicle(carId: number) {
     const wantsToDelete = confirm('Are you sure you want to delete this vehicle?');
     if (wantsToDelete) {
-      this.http
-        .delete(`https://freeapi.gerasim.in/api/CarRentalApp/DeleteCarbyCarId?carid=${carId}`)
-        .subscribe({
-          next: () => {
+      this.masterService.deleteVehicle(carId).subscribe({
+        next: (response: APIResponse) => {
+          if (response.result) {
             alert('Successfully deleted vehicle.');
-          },
-          error: (error) => {
-            alert('Error: ' + error);
-          },
-        });
+          } else {
+            alert(response.message);
+          }
+        },
+        error: (error) => {
+          alert('Error: ' + error);
+        },
+      });
     }
   }
 
@@ -62,18 +68,23 @@ export class Vehicles implements OnInit {
         bookingDate: new Date().toDateString(),
         discount: 0,
         totalBillAmount: car.dailyRate,
+        bookingUid: '',
+        brand: car.brand,
+        model: car.model,
       };
     }
 
-    this.http
-      .post('https://freeapi.gerasim.in/api/CarRentalApp/CreateNewBooking', this.newBookingObj)
-      .subscribe({
-        next: () => {
+    this.masterService.onCreateNewBooking(this.newBookingObj).subscribe({
+      next: (response: APIResponse) => {
+        if (response.result) {
           alert('Vehicle booked successfully.');
-        },
-        error: (error) => {
-          alert('Error: ' + error);
-        },
-      });
+        } else {
+          alert(response.message);
+        }
+      },
+      error: (error) => {
+        alert('Error: ' + error);
+      },
+    });
   }
 }

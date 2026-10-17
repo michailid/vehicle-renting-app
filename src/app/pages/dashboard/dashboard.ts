@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { APIResponse } from '../../model/api-response.model';
 import { DashboardData } from '../../model/dashboard-data.model';
+import { Master } from '../../services/master';
 
 @Component({
   imports: [],
@@ -10,15 +10,17 @@ import { DashboardData } from '../../model/dashboard-data.model';
   templateUrl: './dashboard.html',
 })
 export class Dashboard implements OnInit {
-  http = inject(HttpClient);
+  masterService = inject(Master);
   dashboardData = signal<DashboardData>(new DashboardData());
 
   ngOnInit(): void {
-    this.http
-      .get<APIResponse>('https://freeapi.gerasim.in/api/CarRentalApp/GetDashboardData')
-      .subscribe({
+    this.masterService.getDashboardData().subscribe({
         next: (response: APIResponse) => {
-          this.dashboardData.set(response.data[0]);
+          if (response.result) {
+            this.dashboardData.set(response.data[0]);
+          } else {
+            alert(response.message);
+          }
         },
         error: (error: any) => {
           alert('Error: ' + error);

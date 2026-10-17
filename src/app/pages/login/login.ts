@@ -1,10 +1,10 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LOGGED_USER_KEY } from '../../constants/constants';
 import { ActivatedRoute, Router } from '@angular/router';
 import { APIResponse } from '../../model/api-response.model';
 import { Customer } from '../../model/customer.model';
+import { Master } from '../../services/master';
 
 @Component({
   imports: [FormsModule],
@@ -21,7 +21,7 @@ export class Login {
   customersData: Customer[] = [];
   registerObj = new Customer();
 
-  http = inject(HttpClient);
+  masterService = inject(Master);
   router = inject(Router);
   returnUrl: string = '/';
 
@@ -34,10 +34,12 @@ export class Login {
   }
 
   onRegister() {
-    this.http
-      .post('https://freeapi.gerasim.in/api/CarRentalApp/CreateNewCustomer', this.registerObj)
-      .subscribe({
-        next: () => {},
+    this.masterService.createNewCustomer(this.registerObj).subscribe({
+        next: (response: APIResponse) => {
+          if (!response.result) {
+            alert(response.message);
+          }
+        },
         error: (error) => {
           alert('Error: ' + error);
         },
@@ -45,23 +47,26 @@ export class Login {
   }
 
   getAllCustomers() {
-    this.http
-      .get<APIResponse>('https://freeapi.gerasim.in/api/CarRentalApp/GetCustomers')
-      .subscribe({
+    this.masterService.getAllCustomers().subscribe({
         next: (response: APIResponse) => {
-          this.logggedInUser = response.data.find(
-            (c: Customer) => c.email == this.loginObj.email && c.mobileNo == this.loginObj.mobileNo,
-          );
+          if (response.result) {
+            this.logggedInUser = response.data.find(
+              (c: Customer) =>
+                c.email == this.loginObj.email && c.mobileNo == this.loginObj.mobileNo,
+            );
 
-          if (this.logggedInUser) {
-            localStorage.setItem(LOGGED_USER_KEY, JSON.stringify(this.logggedInUser));
-            console.log('Logged in successfully');
-            this.router.navigateByUrl(this.returnUrl);
+            if (this.logggedInUser) {
+              localStorage.setItem(LOGGED_USER_KEY, JSON.stringify(this.logggedInUser));
+              console.log('Logged in successfully');
+              this.router.navigateByUrl(this.returnUrl);
+            } else {
+              alert('Wrong credentials');
+            }
+
+            this.customersData = response.data;
           } else {
-            alert('Wrong credentials');
+            alert(response.message);
           }
-
-          this.customersData = response.data;
         },
         error: (error: any) => {
           alert('Error: ' + error);

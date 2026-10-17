@@ -1,8 +1,8 @@
 import { DatePipe } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { APIResponse } from '../../model/api-response.model';
 import { Booking } from '../../model/booking.model';
+import { Master } from '../../services/master';
 @Component({
   imports: [DatePipe],
   selector: 'app-bookings',
@@ -12,19 +12,21 @@ import { Booking } from '../../model/booking.model';
 export class Bookings implements OnInit {
   bookings = signal<Booking[]>([]);
   filteredBookings = signal<Booking[]>([]);
-  http = inject(HttpClient);
+  masterService = inject(Master);
 
   ngOnInit(): void {
     this.getAllBookings();
   }
 
   getAllBookings() {
-    this.http
-      .get<APIResponse>('https://freeapi.gerasim.in/api/CarRentalApp/geAllBookings')
-      .subscribe({
+    this.masterService.getAllBookings().subscribe({
         next: (response: APIResponse) => {
-          this.bookings.set(response.data);
-          this.filteredBookings.set(this.bookings());
+          if (response.result) {
+            this.bookings.set(response.data);
+            this.filteredBookings.set(this.bookings());
+          } else {
+            alert(response.message);
+          }
         },
         error: (error: any) => {
           alert('Error: ' + error);
@@ -48,11 +50,13 @@ export class Bookings implements OnInit {
   }
 
   onDelete(bookingId: number) {
-    this.http
-      .delete(`https://freeapi.gerasim.in/api/CarRentalApp/DeletBookingById?id=${bookingId}`)
-      .subscribe({
-        next: () => {
-          alert('Successfully deleted booking.');
+    this.masterService.deleteBooking(bookingId).subscribe({
+        next: (response: APIResponse) => {
+          if (response.result) {
+            alert('Successfully deleted booking.');
+          } else {
+            alert(response.message);
+          }
         },
         error: (error) => {
           alert('Error: ' + error);
