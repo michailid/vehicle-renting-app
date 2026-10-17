@@ -15,16 +15,16 @@ export class Dashboard implements OnInit {
 
   ngOnInit(): void {
     this.masterService.getDashboardData().subscribe({
-        next: (response: APIResponse) => {
-          if (response.result) {
-            this.dashboardData.set(response.data[0]);
-          } else {
-            alert(response.message);
-          }
-        },
-        error: (error: any) => {
-          alert('Error: ' + error);
-        },
-      });
+      next: (response: APIResponse) => {
+        if (response.result) {
+          this.dashboardData.set(response.data[0]);
+        } else {
+          alert(response.message);
+        }
+      },
+      error: (error: any) => {
+        alert('Error: ' + error);
+      },
+    });
   }
 }
