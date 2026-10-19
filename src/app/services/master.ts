@@ -44,7 +44,9 @@ export class Master {
   }
 
   deleteCustomer(customerId: number): Observable<APIResponse> {
-    return this.http.delete<APIResponse>(this.api_url + API_METHOD.DELETE_CUSTOMER_BY_ID + '?id=' + customerId);
+    return this.http.delete<APIResponse>(
+      this.api_url + API_METHOD.DELETE_CUSTOMER_BY_ID + '?id=' + customerId,
+    );
   }
 
   updateCustomer(customer: Customer | null): Observable<APIResponse> {
@@ -56,7 +58,9 @@ export class Master {
   }
 
   deleteBooking(bookingId: number): Observable<APIResponse> {
-    return this.http.delete<APIResponse>(this.api_url + API_METHOD.DELETE_BOOKING_BY_ID + '?id=' + bookingId);
+    return this.http.delete<APIResponse>(
+      this.api_url + API_METHOD.DELETE_BOOKING_BY_ID + '?id=' + bookingId,
+    );
   }
 
   onCreateNewBooking(newBookingObj: Booking): Observable<APIResponse> {
