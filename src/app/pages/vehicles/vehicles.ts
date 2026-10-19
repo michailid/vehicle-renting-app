@@ -43,6 +43,7 @@ export class Vehicles implements OnInit {
       this.masterService.deleteVehicle(carId).subscribe({
         next: (response: APIResponse) => {
           if (response.result) {
+            this.getAllCars();
             alert('Successfully deleted vehicle.');
           } else {
             alert(response.message);
