@@ -15,43 +15,54 @@
           <span class="status-badge">Available</span>
         </div>
 
-        <div class="vehicle-body">
-          <div class="vehicle-header">
-            <div>
-              <p class="meta-label">Brand</p>
-              <h3>{{ car.brand }}</h3>
+        @if (selectedCarId !== car.carId) {
+          <div class="vehicle-body">
+            <div class="vehicle-header">
+              <div>
+                <p class="meta-label">Brand</p>
+                <h3>{{ car.brand }}</h3>
+              </div>
+              <span class="price">₹{{ car.dailyRate }}/day</span>
             </div>
-            <span class="price">₹{{ car.dailyRate }}/day</span>
+
+            <div class="vehicle-specs">
+              <div>
+                <span class="spec-label">Model</span>
+                <strong>{{ car.model }}</strong>
+              </div>
+              <div>
+                <span class="spec-label">Year</span>
+                <strong>{{ car.year }}</strong>
+              </div>
+              <div>
+                <span class="spec-label">Color</span>
+                <strong>{{ car.color }}</strong>
+              </div>
+            </div>
+
+            <div class="vehicle-footer">
+              <div>
+                <span class="spec-label">Registration</span>
+                <strong>{{ car.regNo }}</strong>
+              </div>
+            </div>
           </div>
 
-          <div class="vehicle-specs">
-            <div>
-              <span class="spec-label">Model</span>
-              <strong>{{ car.model }}</strong>
-            </div>
-            <div>
-              <span class="spec-label">Year</span>
-              <strong>{{ car.year }}</strong>
-            </div>
-            <div>
-              <span class="spec-label">Color</span>
-              <strong>{{ car.color }}</strong>
-            </div>
+          <div class="vehicle-actions">
+            <a class="secondary-btn" routerLink="{{ car.carId }}/edit">Edit</a>
+            <a class="delete-btn" (click)="onDeleteVehicle(car.carId)">Delete</a>
+            <a class="primary-btn" (click)="onSelect(car)">Book</a>
           </div>
-
-          <div class="vehicle-footer">
-            <div>
-              <span class="spec-label">Registration</span>
-              <strong>{{ car.regNo }}</strong>
-            </div>
+        } @else {
+          <div class="booking-actions">
+            <label class="date-label">Select the date on which you want to book the car:</label>
+            <input type="date" class="form-control" #bookingDate />
+            @if (errorText()) {
+              <div class="error">{{ errorText() }}</div>
+            }
+            <a class="primary-btn" (click)="onBook(car, bookingDate.value)">Book</a>
           </div>
-        </div>
-
-        <div class="vehicle-actions">
-          <a class="secondary-btn" routerLink="{{ car.carId }}/edit">Edit</a>
-          <a class="delete-btn" (click)="onDeleteVehicle(car.carId)">Delete</a>
-          <a class="primary-btn" (click)="onBook(car)">Book</a>
-        </div>
+        }
       </article>
     }
   </section>

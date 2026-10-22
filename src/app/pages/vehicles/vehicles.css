@@ -181,7 +181,8 @@
   border-top: 1px solid rgba(148, 163, 184, 0.12);
 }
 
-.vehicle-actions {
+.vehicle-actions,
+.booking-actions {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
@@ -191,8 +192,23 @@
 .vehicle-actions .primary-btn,
 .vehicle-actions .secondary-btn,
 .vehicle-actions .ghost-btn,
-.vehicle-actions .delete-btn {
+.vehicle-actions .delete-btn,
+.booking-actions .primary-btn {
   flex: 1 1 90px;
+}
+
+.booking-actions {
+  margin-top: 2rem;
+}
+
+.date-label {
+  color: #f8fafc;
+}
+
+.error {
+  color: red;
+  width: 100%;
+  flex: 1 1 auto;
 }
 
 @media (max-width: 720px) {
@@ -205,14 +221,16 @@
     width: 100%;
   }
 
-  .vehicle-actions {
+  .vehicle-actions,
+  .booking-actions {
     flex-direction: column;
   }
 
   .vehicle-actions .primary-btn,
   .vehicle-actions .secondary-btn,
   .vehicle-actions .ghost-btn,
-  .vehicle-actions .delete-btn {
+  .vehicle-actions .delete-btn,
+  .booking-actions .primary-btn {
     width: 100%;
     flex: 1 1 auto;
   }

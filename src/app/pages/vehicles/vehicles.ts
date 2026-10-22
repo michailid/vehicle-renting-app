@@ -15,6 +15,8 @@ import { Master } from '../../services/master';
 export class Vehicles implements OnInit {
   cars = signal<Vehicle[]>([]);
   masterService = inject(Master);
+  selectedCarId: number | null = null; // null if no car is being selected at the moment
+  errorText = signal<string>('');
 
   newBookingObj = new Booking();
 
@@ -56,7 +58,17 @@ export class Vehicles implements OnInit {
     }
   }
 
-  onBook(car: Vehicle) {
+  onSelect(car: Vehicle) {
+    this.selectedCarId = car.carId;
+    this.errorText.set('');
+  }
+
+  onBook(car: Vehicle, bookingDate: string) {
+    if (!bookingDate) {
+      this.errorText.set('* Please select a date.');
+      return;
+    }
+
     if (localStorage.getItem(LOGGED_USER_KEY)) {
       const userData = JSON.parse(localStorage.getItem(LOGGED_USER_KEY)!);
       this.newBookingObj = {
@@ -66,7 +78,7 @@ export class Vehicles implements OnInit {
         email: userData.email,
         bookingId: 0,
         carId: car.carId,
-        bookingDate: new Date().toDateString(),
+        bookingDate: bookingDate,
         discount: 0,
         totalBillAmount: car.dailyRate,
         bookingUid: '',
@@ -87,5 +99,7 @@ export class Vehicles implements OnInit {
         alert('Error: ' + error);
       },
     });
+
+    this.selectedCarId = null;
   }
 }
