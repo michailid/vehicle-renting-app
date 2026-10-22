@@ -20,18 +20,18 @@ export class Bookings implements OnInit {
 
   getAllBookings() {
     this.masterService.getAllBookings().subscribe({
-        next: (response: APIResponse) => {
-          if (response.result) {
-            this.bookings.set(response.data);
-            this.filteredBookings.set(this.bookings());
-          } else {
-            alert(response.message);
-          }
-        },
-        error: (error: any) => {
-          alert('Error: ' + error);
-        },
-      });
+      next: (response: APIResponse) => {
+        if (response.result) {
+          this.bookings.set(response.data);
+          this.filteredBookings.set(this.bookings());
+        } else {
+          alert(response.message);
+        }
+      },
+      error: (error: any) => {
+        alert('Error: ' + error);
+      },
+    });
   }
 
   onSearch(from: string, to: string) {
@@ -51,16 +51,17 @@ export class Bookings implements OnInit {
 
   onDelete(bookingId: number) {
     this.masterService.deleteBooking(bookingId).subscribe({
-        next: (response: APIResponse) => {
-          if (response.result) {
-            alert('Successfully deleted booking.');
-          } else {
-            alert(response.message);
-          }
-        },
-        error: (error) => {
-          alert('Error: ' + error);
-        },
-      });
+      next: (response: APIResponse) => {
+        if (response.result) {
+          this.getAllBookings();
+          alert('Successfully deleted booking.');
+        } else {
+          alert(response.message);
+        }
+      },
+      error: (error) => {
+        alert('Error: ' + error);
+      },
+    });
   }
 }
