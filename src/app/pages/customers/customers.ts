@@ -22,17 +22,17 @@ export class Customers implements OnInit {
 
   getAllCustomers() {
     this.masterService.getAllCustomers().subscribe({
-        next: (response: APIResponse) => {
-          if (response.result) {
-            this.customers.set(response.data);
-          } else {
-            alert(response.message);
-          }
-        },
-        error: (error: any) => {
-          alert('Error loading customers: ' + error);
-        },
-      });
+      next: (response: APIResponse) => {
+        if (response.result) {
+          this.customers.set(response.data);
+        } else {
+          alert(response.message);
+        }
+      },
+      error: (error: any) => {
+        alert('Error loading customers: ' + error);
+      },
+    });
   }
 
   onEdit(customer: Customer) {
@@ -44,29 +44,35 @@ export class Customers implements OnInit {
     const wantsToDelete = confirm('Are you sure you want to delete this customer?');
     if (wantsToDelete) {
       this.masterService.deleteCustomer(customer.customerId).subscribe({
-          next: (response: APIResponse) => {
-            if (!response.result) {
-              alert(response.message);
-            }
-          },
-          error: (error) => {
-            alert('Error: ' + error);
-          },
-        });
-    }
-  }
-
-  onSave() {
-    this.masterService.updateCustomer(this.draft).subscribe({
         next: (response: APIResponse) => {
           if (!response.result) {
             alert(response.message);
+          } else {
+            this.getAllCustomers();
+            alert('Customer deleted successfully.');
           }
         },
         error: (error) => {
           alert('Error: ' + error);
         },
       });
+    }
+  }
+
+  onSave() {
+    this.masterService.updateCustomer(this.draft).subscribe({
+      next: (response: APIResponse) => {
+        if (!response.result) {
+          alert(response.message);
+        } else {
+          this.getAllCustomers();
+          alert('Customer updated successfully.');
+        }
+      },
+      error: (error) => {
+        alert('Error: ' + error);
+      },
+    });
     this.editingId = null;
     this.draft = null;
   }
