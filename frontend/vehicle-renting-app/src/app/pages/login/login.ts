@@ -17,7 +17,7 @@ export class Login {
     email: '',
     mobileNo: '',
   };
-  logggedInUser = {};
+  logggedInUser: Customer | undefined;
   customersData: Customer[] = [];
   registerObj = new Customer();
 
@@ -35,42 +35,41 @@ export class Login {
 
   onRegister() {
     this.masterService.createNewCustomer(this.registerObj).subscribe({
-        next: (response: APIResponse) => {
-          if (!response.result) {
-            alert(response.message);
-          }
-        },
-        error: (error) => {
-          alert('Error: ' + error);
-        },
-      });
+      next: (response: Customer) => {
+        if (!response) {
+          alert(response);
+        }
+      },
+      error: (error: Error) => {
+        alert('Error: ' + error.message);
+      },
+    });
   }
 
   getAllCustomers() {
     this.masterService.getAllCustomers().subscribe({
-        next: (response: APIResponse) => {
-          if (response.result) {
-            this.logggedInUser = response.data.find(
-              (c: Customer) =>
-                c.email == this.loginObj.email && c.mobileNo == this.loginObj.mobileNo,
-            );
+      next: (response: Customer[]) => {
+        if (response) {
+          this.logggedInUser = response.find(
+            (c: Customer) => c.email == this.loginObj.email && c.mobileNo == this.loginObj.mobileNo,
+          );
 
-            if (this.logggedInUser) {
-              localStorage.setItem(LOGGED_USER_KEY, JSON.stringify(this.logggedInUser));
-              console.log('Logged in successfully');
-              this.router.navigateByUrl(this.returnUrl);
-            } else {
-              alert('Wrong credentials');
-            }
-
-            this.customersData = response.data;
+          if (this.logggedInUser) {
+            localStorage.setItem(LOGGED_USER_KEY, JSON.stringify(this.logggedInUser));
+            console.log('Logged in successfully');
+            this.router.navigateByUrl(this.returnUrl);
           } else {
-            alert(response.message);
+            alert('Wrong credentials');
           }
-        },
-        error: (error: any) => {
-          alert('Error: ' + error);
-        },
-      });
+
+          this.customersData = response;
+        } else {
+          alert(response);
+        }
+      },
+      error: (error: Error) => {
+        alert('Error: ' + error.message);
+      },
+    });
   }
 }

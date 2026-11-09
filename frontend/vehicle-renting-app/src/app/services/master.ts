@@ -26,31 +26,35 @@ export class Master {
   }
 
   updateVehicle(vehicle: Vehicle): Observable<Vehicle> {
-    return this.http.put<Vehicle>(this.api_url + API_METHOD.UPDATE_CAR + '/' + vehicle.carId, vehicle);
+    return this.http.put<Vehicle>(
+      this.api_url + API_METHOD.UPDATE_CAR + '/' + vehicle.carId,
+      vehicle,
+    );
   }
 
   deleteVehicle(carId: number): Observable<void> {
+    return this.http.delete<void>(this.api_url + API_METHOD.DELETE_CAR_BY_CAR_ID + '/' + carId);
+  }
+
+  getAllCustomers(): Observable<Customer[]> {
+    return this.http.get<Customer[]>(this.api_url + API_METHOD.GET_CUSTOMERS);
+  }
+
+  createNewCustomer(customer: Customer): Observable<Customer> {
+    return this.http.post<Customer>(this.api_url + API_METHOD.CREATE_NEW_CUSTOMER, customer);
+  }
+
+  deleteCustomer(customerId: number): Observable<void> {
     return this.http.delete<void>(
-      this.api_url + API_METHOD.DELETE_CAR_BY_CAR_ID + '/' + carId,
+      this.api_url + API_METHOD.DELETE_CUSTOMER_BY_ID + '/' + customerId,
     );
   }
 
-  getAllCustomers(): Observable<APIResponse> {
-    return this.http.get<APIResponse>(this.api_url + API_METHOD.GET_CUSTOMERS);
-  }
-
-  createNewCustomer(customer: Customer): Observable<APIResponse> {
-    return this.http.post<APIResponse>(this.api_url + API_METHOD.CREATE_NEW_CUSTOMER, customer);
-  }
-
-  deleteCustomer(customerId: number): Observable<APIResponse> {
-    return this.http.delete<APIResponse>(
-      this.api_url + API_METHOD.DELETE_CUSTOMER_BY_ID + '?id=' + customerId,
+  updateCustomer(customer: Customer | null): Observable<Customer> {
+    return this.http.put<Customer>(
+      this.api_url + API_METHOD.UPDATE_CUSTOMER + '/' + customer?.customerId,
+      customer,
     );
-  }
-
-  updateCustomer(customer: Customer | null): Observable<APIResponse> {
-    return this.http.put<APIResponse>(this.api_url + API_METHOD.UPDATE_CUSTOMER, customer);
   }
 
   getAllBookings(): Observable<APIResponse> {
