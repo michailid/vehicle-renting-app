@@ -1,0 +1,39 @@
+<div class="app-shell">
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">V</span>
+      <div class="brand-text">
+        <strong>VehicleRenting</strong>
+        <small>Drive smarter</small>
+      </div>
+    </div>
+
+    <nav class="main-nav" aria-label="Main navigation">
+      <a routerLink="dashboard" routerLinkActive="active" class="nav-link">Dashboard</a>
+      <a routerLink="vehicles" routerLinkActive="active" class="nav-link">Vehicles</a>
+      <a routerLink="bookings" routerLinkActive="active" class="nav-link">Bookings</a>
+      <a routerLink="customers" routerLinkActive="active" class="nav-link">Customers</a>
+    </nav>
+
+    <div class="user-actions">
+      @if (loggedInUser()) {
+        <button type="button" class="ghost-btn">{{ loggedInUser().email }}</button>
+        <button type="button" class="logout-btn" (click)="onLogout()">Logout</button>
+      } @else {
+        <button type="button" routerLink="login" class="primary-btn">Login</button>
+      }
+    </div>
+  </header>
+
+  <router-outlet></router-outlet>
+
+  <footer class="app-footer">
+    <div class="footer-brand">VehicleRenting</div>
+    <div class="footer-links">
+      <a href="#">Support</a>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+    </div>
+    <div class="footer-copy">© 2026 All rights reserved</div>
+  </footer>
+</div>
