@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/vehicles")
+@CrossOrigin(origins = "http://localhost:4200")
 public class VehicleController {
 
     @Autowired
@@ -30,11 +30,6 @@ public class VehicleController {
         return vehicleRepository.save(vehicle);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteVehicleById(@PathVariable Long id) {
-        vehicleRepository.deleteById(id);
-    }
-
     @PutMapping("/{id}")
     public Vehicle updateVehicle(@PathVariable Long id, @RequestBody Vehicle editedVehicle) {
         Vehicle vehicle = vehicleRepository.findById(id).orElseThrow();
@@ -47,5 +42,10 @@ public class VehicleController {
         vehicle.setCarImage(editedVehicle.getCarImage());
 
         return vehicleRepository.save(vehicle);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteVehicleById(@PathVariable Long id) {
+        vehicleRepository.deleteById(id);
     }
 }
