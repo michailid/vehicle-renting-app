@@ -24,9 +24,9 @@ export class EditVehicle implements OnInit {
 
     // get the list of all cars and find the current car
     this.masterService.getAllVehicles().subscribe({
-      next: (response: APIResponse) => {
-        if (response.result) {
-          const found = response.data.find((c: Vehicle) => c.carId === id);
+      next: (response: Vehicle[]) => {
+        if (response) {
+          const found = response.find((c: Vehicle) => c.carId === id);
           if (found) {
             this.updateVehicleObj = { ...found }; // copy for editing
             this.cdr.markForCheck(); // refresh the UI
@@ -35,7 +35,7 @@ export class EditVehicle implements OnInit {
             alert('Vehicle not found.');
           }
         } else {
-          alert(response.message);
+          alert(response);
         }
       },
       error: (error: any) => {
@@ -46,18 +46,18 @@ export class EditVehicle implements OnInit {
 
   onUpdateVehicle() {
     this.masterService.updateVehicle(this.updateVehicleObj).subscribe({
-        next: (response: APIResponse) => {
-          if (response.result) {
-            alert('Successfully edited vehicle.');
-            this.router.navigateByUrl('vehicles');
-          } else {
-            alert(response.message);
-          }
-        },
-        error: (error) => {
-          alert('Error:' + error);
-        },
-      });
+      next: (response: Vehicle) => {
+        if (response) {
+          alert('Successfully edited vehicle.');
+          this.router.navigateByUrl('vehicles');
+        } else {
+          alert(response);
+        }
+      },
+      error: (error: Error) => {
+        alert('Error:' + error.message);
+      },
+    });
   }
 
   onCancel() {

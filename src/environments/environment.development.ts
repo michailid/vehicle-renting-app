@@ -1,3 +1,3 @@
 export const environment = {
-  API_URL: 'https://freeapi.gerasim.in/api/CarRentalApp/',
+  API_URL: 'http://localhost:8080/', //'https://freeapi.gerasim.in/api/CarRentalApp/',
 };

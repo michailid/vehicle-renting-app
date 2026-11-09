@@ -17,21 +17,21 @@ export class Master {
     return this.http.get<APIResponse>(this.api_url + API_METHOD.GET_DASHBOARD_DATA);
   }
 
-  getAllVehicles(): Observable<APIResponse> {
-    return this.http.get<APIResponse>(this.api_url + API_METHOD.GET_CARS);
+  getAllVehicles(): Observable<Vehicle[]> {
+    return this.http.get<Vehicle[]>(this.api_url + API_METHOD.GET_CARS);
   }
 
-  createNewVehicle(vehicle: Vehicle): Observable<APIResponse> {
-    return this.http.post<APIResponse>(this.api_url + API_METHOD.CREATE_NEW_CAR, vehicle);
+  createNewVehicle(vehicle: Vehicle): Observable<Vehicle> {
+    return this.http.post<Vehicle>(this.api_url + API_METHOD.CREATE_NEW_CAR, vehicle);
   }
 
-  updateVehicle(vehicle: Vehicle): Observable<APIResponse> {
-    return this.http.put<APIResponse>(this.api_url + API_METHOD.UPDATE_CAR, vehicle);
+  updateVehicle(vehicle: Vehicle): Observable<Vehicle> {
+    return this.http.put<Vehicle>(this.api_url + API_METHOD.UPDATE_CAR + '/' + vehicle.carId, vehicle);
   }
 
-  deleteVehicle(carId: number): Observable<APIResponse> {
-    return this.http.delete<APIResponse>(
-      this.api_url + API_METHOD.DELETE_CAR_BY_CAR_ID + '?carid=' + carId,
+  deleteVehicle(carId: number): Observable<void> {
+    return this.http.delete<void>(
+      this.api_url + API_METHOD.DELETE_CAR_BY_CAR_ID + '/' + carId,
     );
   }
 

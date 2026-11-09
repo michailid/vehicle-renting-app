@@ -26,11 +26,11 @@ export class Vehicles implements OnInit {
 
   getAllCars() {
     this.masterService.getAllVehicles().subscribe({
-      next: (response: APIResponse) => {
-        if (response.result) {
-          this.cars.set(response.data);
+      next: (response: Vehicle[]) => {
+        if (response) {
+          this.cars.set(response);
         } else {
-          alert(response.message);
+          alert(response);
         }
       },
       error: (error: any) => {
@@ -43,16 +43,12 @@ export class Vehicles implements OnInit {
     const wantsToDelete = confirm('Are you sure you want to delete this vehicle?');
     if (wantsToDelete) {
       this.masterService.deleteVehicle(carId).subscribe({
-        next: (response: APIResponse) => {
-          if (response.result) {
-            this.getAllCars();
-            alert('Successfully deleted vehicle.');
-          } else {
-            alert(response.message);
-          }
+        next: (response: void) => {
+          this.getAllCars();
+          alert('Successfully deleted vehicle.');
         },
-        error: (error) => {
-          alert('Error: ' + error);
+        error: (error: Error) => {
+          alert('Error: ' + error.message);
         },
       });
     }

@@ -18,18 +18,18 @@ export class AddNewVehicle {
 
   onSaveVehicle() {
     this.masterService.createNewVehicle(this.newVehicleObj).subscribe({
-        next: (res: APIResponse) => {
-          if (res.result) {
-            alert('Vehicle added successfully.');
-            this.router.navigateByUrl('vehicles');
-          } else {
-            alert(res.message);
-          }
-        },
-        error: (error) => {
-          alert('Error: ' + error);
-        },
-      });
+      next: (res: Vehicle) => {
+        if (res) {
+          alert('Vehicle added successfully.');
+          this.router.navigateByUrl('vehicles');
+        } else {
+          alert(res);
+        }
+      },
+      error: (error: Error) => {
+        alert('Error: ' + error.message);
+      },
+    });
   }
 
   onCancel() {
